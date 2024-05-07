@@ -2,7 +2,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'; 
   onMounted(() => {
-    var menuItem = document.querySelectorAll(".menu-inner .menu-item");
+    //menu-horizontal
+    var menuItem = document.querySelectorAll(".menu-horizontal .menu-inner .menu-item");
     menuItem.forEach((item) => {
         item.addEventListener('mouseover',(e) => {
           e.preventDefault()
@@ -13,6 +14,42 @@ import { onMounted } from 'vue';
           item.classList.remove("open");
         });
     });
+
+    //fix dot menu-horizontal
+    var menu_icons = document.querySelectorAll(".menu-horizontal .menu-inner .menu-item .menu-link .menu-icon");
+    menu_icons.forEach(menu_icon => {
+    var menu_link = menu_icon.closest('.menu-link');
+    // Check if such ancestor exists
+    if (menu_link) {
+        menu_link.classList.add("not-before");
+    }
+
+    
+    // Listen for window resize event
+    window.addEventListener('resize',function(){
+      let layout_menu = document.getElementById('layout-menu');
+      layout_menu.className = '';
+      layout_menu?.classList.add('menu','bg-menu-theme');
+      if(window.innerWidth < 1200){
+        layout_menu?.classList.add('layout-menu','menu-vertical');
+
+        layout_menu.getElementsByClassName('container-xxl')[0].classList.add('flex-column','p-0');
+    
+        //set up move node
+        document.getElementById('menu-inner-wrap').classList.add('overflow-auto');
+    
+   
+
+      }else{
+        layout_menu?.classList.add('layout-menu-horizontal','menu-horizontal','container-fluid','flex-grow-0')
+      }
+    });
+    
+
+
+});
+ 
+
   })
 
   
@@ -887,7 +924,7 @@ import { onMounted } from 'vue';
               class="layout-menu-horizontal menu-horizontal menu bg-menu-theme flex-grow-0"
             >
               <div class="container-xxl d-flex h-100">
-                <ul class="menu-inner">
+                <ul class="menu-inner" id="menu-inner-wrap">
                   <!-- Dashboards -->
                   <li class="menu-item">
                     <a href="javascript:void(0)" class="menu-link menu-toggle">

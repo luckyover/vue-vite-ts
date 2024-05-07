@@ -1,0 +1,6 @@
+
+
+//fix dot
+.menu-horizontal .menu-link.not-before::before{
+    content: none !important;
+}
