@@ -7,7 +7,7 @@ import 'boxicons'
 // import 'bootstrap/dist/css/bootstrap.css'
 //import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 //boxicons
-//  import 'boxicons/css/boxicons.min.css';
+  import 'boxicons/css/boxicons.min.css';
 //common css
 // import './assets/scss/theme-default.scss'
 // import './assets/scss/core.scss'
