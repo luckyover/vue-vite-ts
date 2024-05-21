@@ -27,6 +27,9 @@ module.exports = {
       lg: '976px',
       xl: '1200px',
     },
+    inset: {
+      '3r': '15rem',
+    }
   },
   // Other Tailwind CSS configuration options...
 }

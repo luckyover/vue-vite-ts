@@ -54,11 +54,11 @@
       <!-- Navbar -->
 
       <nav
-        class="layout-navbar justify-start navbar h-16 flex xl:fixed xl:inset-x-0 xl:inset-y-0 shadow-ct backdrop-blur bg-bg_layout text-nav py-1"
+        class="layout-navbar w-full justify-start navbar h-16 flex xl:fixed xl:inset-x-0 xl:inset-y-0 shadow-ct backdrop-blur bg-bg_layout text-nav py-1"
         id="layout-navbar"
       >
         <div class="flex w-full flex-wrap justify-between items-center px-6">
-          <div class="navbar-brand flex">
+          <div class="navbar-brand flex ">
             <a href="index-2.html" class="app-brand-link flex items-center gap-2">
               <span class="app-brand-logo">
                 <svg
@@ -142,17 +142,17 @@
 
             <a
               href="javascript:void(0);"
-              class="mobile layout-menu-toggle bg-bgm border-7 border-bod border-solid rounded-full"
+              class="mobile hidden layout-menu-toggle bg-bgm border-7 border-bod border-solid rounded-full left-3r absolute"
             >
               <i class="justify-center bx bx-chevron-left bx-sm align-middle text-txw w-6 h-6 !flex items-center"></i>
             </a>
           </div>
-          <div class="layout-menu-toggle navbar-nav"  >
+          <div class="layout-menu-toggle navbar-nav hidden"  >
             <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
               <i class="bx bx-menu bx-sm"></i>
             </a>
           </div>
-          <div  class="navbar-nav-right"
+          <div  class="navbar-nav-right flex"
             id="navbar-collapse"
           >
             <ul class="navbar-nav flex-row align-items-center ms-auto">
