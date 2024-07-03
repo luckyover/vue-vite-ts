@@ -15,6 +15,9 @@ module.exports = {
         bgh:'#787bff',
         bod:'#f5f5f9',
         txw:'#fff',
+        gray:{
+          100:'#566a7f',
+        }
       },
       boxShadow:{
         ct:'0 1px 0 #d9dee3',
@@ -31,6 +34,9 @@ module.exports = {
       },
       inset: {
         '3px': '15rem',
+      },
+      fontSize:{
+        
       }
     }
    
