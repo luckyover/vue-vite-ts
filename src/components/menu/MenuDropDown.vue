@@ -1,84 +1,30 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import MenuChildDropDown from "@/components/menu/MenuChildDropDown.vue";
-const menus = ref([
-  {
-    menu: "Layouts",
-    icon: "bx-layout",
-    child: [
-      {
-        menu: "Test",
-        icon: "bx-layout",
+import menu from "@/data/menu.js";
+import {useTab} from "@/composables/tab-menu.js";
+const menu_inner = ref<HTMLElement | null>(null);
+useTab(menu_inner)
 
-        child: [
-          {
-            menu: "Test11",
-            icon: "bx-layout",
-          },
-          {
-            menu: "Test12",
-            icon: "",
-
-           
-          },
-        ],
-      },
-      {
-        menu: "Test2",
-        icon: "bx-layout",
-
-        child: [],
-      },
-    ],
-  },
-  {
-    menu: "Layouts",
-    icon: "bx-layout",
-    child: [
-      {
-        menu: "Test",
-        icon: "bx-layout",
-
-        child: [
-          {
-            menu: "Test11",
-            icon: "bx-layout",
-
-            child: [],
-          },
-          {
-            menu: "Test12",
-            icon: "bx-layout",
-
-           
-          },
-        ],
-      },
-      {
-        menu: "Test2",
-        icon: "bx-layout",
-
-        child: [],
-      },
-    ],
-  },
-
-]);
 </script>
 <template>
-  <ul class="menu-inner" >
-    <MenuChildDropDown
-      v-for="(item, index) in menus"
-      :key="index"
-      :item="item"
-      :parent="true"
-    />
-  </ul>
+  <div class="w-full max-w-[1000px] mx-auto">
+    <ul class="menu-inner overflow-x-auto overflow-y-hidden" ref="menu_inner">
+      <MenuChildDropDown
+        v-for="(item, index) in menu.menus"
+        :key="index"
+        :item="item"
+        :parent="true"
+      />
+    </ul>
+  </div>
 </template>
 
 <style lang="scss">
 .menu-inner {
   display: flex;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
   .menu-link {
     position: relative;
     padding: 9px 35px 9px 16px;
@@ -116,6 +62,7 @@ const menus = ref([
     &::after {
       width: 0em;
       height: 0em;
+      display: none;
     }
   }
   .menu-item.has-child > .menu-link {
@@ -124,10 +71,17 @@ const menus = ref([
     }
   }
 }
-.menu-item{
+.menu-item {
   position: relative;
 }
-.menu-sub.right{
+.menu-inner > .menu-item {
+  position: unset;
+}
+.menu-inner > .menu-item:not(.item-child) > .menu-sub.right {
+  margin-left: -80px;
+  left: unset;
+}
+.menu-sub.right {
   left: calc(-100% + 35px);
 }
 .item-child > .menu-sub {
@@ -144,13 +98,51 @@ const menus = ref([
 }
 
 .menu-link.not-icon:before {
+  content: "";
+  position: absolute;
+  left: 1.4375rem;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background-color: #b4bdc6 !important;
+}
+.menu-horizontal-prev {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 2.25rem;
+  &::after {
     content: "";
     position: absolute;
-    left: 1.4375rem;
-    width: .375rem;
-    height: .375rem;
-    border-radius: 50%;
-    background-color: #b4bdc6 !important;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid;
+    border-top: 0;
+    border-right: 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
 }
-
+.menu-horizontal-next {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 2.25rem;
+  height: 2.25rem;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid;
+    border-top: 0;
+    border-left: 0;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
 </style>

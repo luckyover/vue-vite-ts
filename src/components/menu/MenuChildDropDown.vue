@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import MenuChildDropDown from "@/components/menu/MenuChildDropDown.vue";
-import { defineProps, ref, watch } from "vue";
+import { defineProps, ref, watch, nextTick, onUnmounted } from "vue";
 interface MenuItem {
   menu: string;
   icon?: string;
   child?: MenuItem[];
   // Add other properties as needed
 }
-defineProps<{
+const props = defineProps<{
   item: MenuItem;
   parent?: boolean;
   position?: string;
@@ -16,30 +16,32 @@ defineProps<{
 const menuSub = ref<HTMLElement | null>(null);
 const menuItem = ref<HTMLElement | null>(null);
 const isShow = ref(false);
-const current = ref<string>('');
+const current = ref<string>("");
+const left = ref<string>("");
 const pos = ref<"left" | "right">("left");
-const isShowMenu = (show: boolean) => {
-  isShow.value = show;
-};
+
 
 watch(
   () => isShow.value,
   () => {
-    if (menuSub.value) {
-      
-      let { right, width } = menuSub.value.getBoundingClientRect();
-      if ((right + width > window.innerWidth)) {
-        pos.value = "right";
+    setTimeout(() => {
+      if (menuSub.value) {
+        let { right, width } = menuSub.value.getBoundingClientRect();
+
+        if (right + width > window.innerWidth) {
+          pos.value = "right";
+        } else {
+          pos.value = "left";
+        }
       }
-    
-    }
+    }, 0);
     if (menuItem.value) {
-      
       let { right } = menuItem.value.getBoundingClientRect();
-      if ((right + 232 > window.innerWidth)) {
-        current.value = 'right';
+      if (right + 250 > window.innerWidth) {
+        current.value = "right";
+      } else {
+        pos.value = "left";
       }
-    
     }
   }
 );
@@ -52,9 +54,9 @@ watch(
       item.child && item.child.length > 0 && 'has-child',
       parent || 'item-child',
     ]"
-   :ref="parent ? 'menuItem' : ''"
-    @mouseover="isShowMenu(true)"
-    @mouseleave="isShowMenu(false)"
+    :ref="parent ? 'menuItem' : ''"
+    @mouseover="isShow = true"
+    @mouseleave="isShow = false"
   >
     <a
       href="javascript:void(0)"
@@ -68,19 +70,25 @@ watch(
       ></i>
       <div>{{ item.menu }}</div>
     </a>
-    <ul
-      v-if="item.child && item.child.length && isShow"
-      class="menu-sub"
-      :class="[position,current]"
-     
-      ref="menuSub"
-    >
-      <MenuChildDropDown
-        v-for="(child, index) in item.child"
-        :key="index"
-        :item="child"
-        :position="pos"
-      />
-    </ul>
+    <Transition 
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
+    enter-active-class="ease-out duration-1000">
+      <ul
+        v-if="item.child && item.child.length && isShow"
+        class="menu-sub"
+        :class="[position, current]"
+        :style="{ left: left + 'px' }"
+        ref="menuSub"
+      >
+      {{left}}
+        <MenuChildDropDown
+          v-for="(child, index) in item.child"
+          :key="index"
+          :item="child"
+          :position="pos"
+        />
+      </ul>
+    </Transition>
   </li>
 </template>
