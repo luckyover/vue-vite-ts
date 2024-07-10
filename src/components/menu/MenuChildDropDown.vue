@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import MenuChildDropDown from "@/components/menu/MenuChildDropDown.vue";
-import { defineProps, ref, watch, nextTick, onUnmounted } from "vue";
+import { defineProps, ref, watch, onMounted } from "vue";
 interface MenuItem {
   menu: string;
   icon?: string;
   child?: MenuItem[];
   // Add other properties as needed
+  show?: boolean;
 }
 const props = defineProps<{
   item: MenuItem;
@@ -20,7 +21,11 @@ const current = ref<string>("");
 const left = ref<string>("");
 const pos = ref<"left" | "right">("left");
 
-
+const handleBlur = (value) => {
+  if (props.parent != true) {
+    isShow.value = value;
+  }
+};
 watch(
   () => isShow.value,
   () => {
@@ -45,6 +50,24 @@ watch(
     }
   }
 );
+
+onMounted(() => {
+  document.addEventListener("blurFinished", (event) => {
+    if (menuItem.value && menuItem.value == event.detail.element) {
+      if (event.detail.type == "mouseover") {
+        isShow.value = true;
+      } else {
+        isShow.value = false;
+      }
+    }
+    if (event.detail.type == "mouseleave") {
+      isShow.value = false;
+    }
+  });
+  document.addEventListener("leaveFinished", (event) => {
+    isShow.value = false;
+  });
+});
 </script>
 
 <template>
@@ -55,8 +78,8 @@ watch(
       parent || 'item-child',
     ]"
     :ref="parent ? 'menuItem' : ''"
-    @mouseover="isShow = true"
-    @mouseleave="isShow = false"
+    @mouseover="handleBlur(true)"
+    @mouseleave="handleBlur(false)"
   >
     <a
       href="javascript:void(0)"
@@ -70,10 +93,11 @@ watch(
       ></i>
       <div>{{ item.menu }}</div>
     </a>
-    <Transition 
-    enter-from-class="opacity-0"
-    enter-to-class="opacity-100"
-    enter-active-class="ease-out duration-1000">
+    <Transition
+      enter-from-class="opacity-0 transform -translate-y-2"
+      enter-to-class="opacity-100 transform -translate-y-0"
+      enter-active-class="ease-in-out duration-300"
+    >
       <ul
         v-if="item.child && item.child.length && isShow"
         class="menu-sub"
@@ -81,7 +105,9 @@ watch(
         :style="{ left: left + 'px' }"
         ref="menuSub"
       >
-      {{left}}
+        {{
+          left
+        }}
         <MenuChildDropDown
           v-for="(child, index) in item.child"
           :key="index"

@@ -288,5 +288,34 @@ export default {
         },
       ],
     },
+    {
+      menu: "Layouts11",
+      icon: "bx-layout",
+      child: [
+        {
+          menu: "Test",
+          icon: "bx-layout",
+
+          child: [
+            {
+              menu: "Test11",
+              icon: "bx-layout",
+
+              child: [],
+            },
+            {
+              menu: "Test12",
+              icon: "bx-layout",
+            },
+          ],
+        },
+        {
+          menu: "Test2",
+          icon: "bx-layout",
+
+          child: [],
+        },
+      ],
+    },
   ],
 };

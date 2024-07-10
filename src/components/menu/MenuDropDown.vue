@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import MenuChildDropDown from "@/components/menu/MenuChildDropDown.vue";
 import menu from "@/data/menu.js";
-import {useTab} from "@/composables/tab-menu.js";
+import { useTab } from "@/composables/tab-menu.js";
+
 const menu_inner = ref<HTMLElement | null>(null);
-useTab(menu_inner)
+useTab(menu_inner);
 
 </script>
 <template>
-  <div class="w-full max-w-[1000px] mx-auto">
+  <div class="w-full max-w-[1000px] mx-auto mt-7">
     <ul class="menu-inner overflow-x-auto overflow-y-hidden" ref="menu_inner">
       <MenuChildDropDown
         v-for="(item, index) in menu.menus"
@@ -25,6 +26,7 @@ useTab(menu_inner)
   display: flex;
   scrollbar-width: none;
   scroll-behavior: smooth;
+  transition: margin 0.3s;
   .menu-link {
     position: relative;
     padding: 9px 35px 9px 16px;
@@ -111,6 +113,7 @@ useTab(menu_inner)
   display: block;
   flex: 0 0 auto;
   width: 2.25rem;
+  height: 2.25rem;
   &::after {
     content: "";
     position: absolute;
