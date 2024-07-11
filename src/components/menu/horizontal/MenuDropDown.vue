@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import MenuChildDropDown from "@/components/menu/horizontal/MenuChildDropDown.vue";
-import menu from "@/data/menu.js";
+import menu from "@/data/menu.ts";
 import { useTab } from "@/composables/tab-menu.ts";
 
 const menu_inner = ref<HTMLElement | null>(null); 
