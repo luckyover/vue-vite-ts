@@ -1,27 +1,19 @@
 <script setup lang="ts">
-import MenuChildDropDown from "@/components/menu/MenuChildDropDown.vue";
-import { defineProps, ref, watch, onMounted } from "vue";
-interface MenuItem {
-  menu: string;
-  icon?: string;
-  child?: MenuItem[];
-  // Add other properties as needed
-  show?: boolean;
-}
-const props = defineProps<{
-  item: MenuItem;
-  parent?: boolean;
-  position?: string;
-}>();
+import MenuChildDropDown from "@/components/menu/horizontal/MenuChildDropDown.vue";
+import { IMenuChildDropDown } from "@/types/menu/menu.ts";
+
+import {  ref, watch } from "vue";
+
+defineProps<IMenuChildDropDown>();
 
 const menuSub = ref<HTMLElement | null>(null);
 const menuItem = ref<HTMLElement | null>(null);
-const isShow = ref(false);
+const isShow = ref<boolean>(false);
 const current = ref<string>("");
 const left = ref<string>("");
 const pos = ref<"left" | "right">("left");
 
-const handleBlur = (value) => {
+const handleBlur = (value:boolean) => {
   isShow.value = value;
 };
 watch(

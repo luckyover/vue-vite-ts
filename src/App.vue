@@ -1,7 +1,7 @@
 <script setup lang="ts">
 //import HorizontalMenu from './components/layout/HorizontalMenu.vue'
 
-import MenuDropDown from '@/components/menu/MenuDropDown.vue'
+import MenuDropDown from '@/components/menu/horizontal/MenuDropDown.vue'
 </script>
 
 <template>

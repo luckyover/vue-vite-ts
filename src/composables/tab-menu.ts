@@ -1,8 +1,23 @@
-import { onMounted, onUnmounted } from "vue";
-import { debounce } from "@/composables/debounce.js";
+import { onMounted, onUnmounted , Ref  } from "vue";
+import { debounce } from "@/composables/debounce.ts";
 
-export function useTab(target, options = {}) {
-  let defaultOptions = {
+interface Options {
+  min: number;
+  max: number;
+  snapPoints: Element[];
+  containerWidth: number;
+  containerRight: number;
+  containerLeft: number;
+  scrollWidth: number;
+  marginLeft: number;
+  el: HTMLElement | null;
+  step: number;
+  prev: HTMLAnchorElement ;
+  next: HTMLAnchorElement ;
+}
+
+export function useTab(target: Ref<HTMLElement | null>, optionsInput:Partial<Options> = {}) {
+  let options:Options  = {
     min: 0,
     max: 0,
     snapPoints: [],
@@ -10,16 +25,15 @@ export function useTab(target, options = {}) {
     containerRight: 0,
     containerLeft: 0,
     marginLeft: 0,
-    el: null,
+    scrollWidth: 0,
+    el: {} as HTMLElement,
     step: 2,
-    prev: null,
-    next: null,
+    prev: {} as HTMLAnchorElement,
+    next: {} as HTMLAnchorElement,
+    ...optionsInput,
   };
 
-  options = {
-    ...defaultOptions,
-    ...options,
-  };
+  
 
   const createWrapDiv = () => {
     const newDiv = document.createElement("div");
@@ -34,30 +48,35 @@ export function useTab(target, options = {}) {
     next.setAttribute("href", "#");
     next.setAttribute("class", "menu-horizontal-next");
 
-    options.el.parentNode.insertBefore(newDiv, options.el);
-    newDiv.appendChild(options.el);
-    newDiv.appendChild(next);
-    newDiv.insertBefore(prev, options.el);
+    if (options.el && options.el.parentNode) {
+      options.el.parentNode.insertBefore(newDiv, options.el);
+      newDiv.appendChild(options.el);
+      newDiv.appendChild(next);
+      newDiv.insertBefore(prev, options.el);
 
-    const newWrapMenu = document.createElement("div");
-    newWrapMenu.setAttribute("class", "overflow-hidden new-wrap-menu w-full");
+      const newWrapMenu = document.createElement("div");
+      newWrapMenu.setAttribute("class", "overflow-hidden new-wrap-menu w-full");
 
-    newDiv.insertBefore(newWrapMenu, options.el);
-    newWrapMenu.appendChild(options.el);
+      newDiv.insertBefore(newWrapMenu, options.el);
+      newWrapMenu.appendChild(options.el);
+    }
 
     return { prev, next };
   };
 
   const getInfoElement = () => {
-    const containerRect = options.el.getBoundingClientRect();
-    options.containerWidth = options.el.clientWidth;
-    options.scrollWidth = options.el.scrollWidth;
-    options.containerLeft = containerRect.left;
-    options.containerRight = options.containerLeft + options.containerWidth;
-    options.snapPoints = Array.from(options.el.children);
+    if (options.el) {
+      const containerRect = options.el.getBoundingClientRect();
+      options.containerWidth = options.el.clientWidth;
+      options.scrollWidth = options.el.scrollWidth;
+      options.containerLeft = containerRect.left;
+      options.containerRight = options.containerLeft + options.containerWidth;
+      options.snapPoints = Array.from(options.el.children) as Element[];
+    }
+   
   };
 
-  const getStartEnd = (arrList) => {
+  const getStartEnd = (arrList:Element[]) => {
     return arrList.reduce(
       (acc, item, index) => {
         const rect = item.getBoundingClientRect();
@@ -68,11 +87,11 @@ export function useTab(target, options = {}) {
 
         return acc;
       },
-      { min: 0, max: 0 }
+      { min: 0, max: 0}
     );
   };
 
-  const scrollToItem = (arrList, step, type) => {
+  const scrollToItem = (arrList: Element[], step: number, type: "prev" | "next") => {
     let isScroll = false;
 
     if (type == "prev" && options.min > 0) {
@@ -105,13 +124,13 @@ export function useTab(target, options = {}) {
 
       if (type == "next") {
         options.marginLeft += options.containerRight - rect.right;
-        options.el.style.marginLeft = options.marginLeft + "px";
+        if(options.el) options.el.style.marginLeft = options.marginLeft + "px";
       }
 
       if (type == "prev") {
         options.marginLeft =
           options.marginLeft - (rect.left - containerRectLeftCurrent);
-        options.el.style.marginLeft = options.marginLeft + "px";
+          if(options.el) options.el.style.marginLeft = options.marginLeft + "px";
       }
 
       options.prev.classList.toggle("disabled", options.min == 0);
@@ -131,7 +150,7 @@ export function useTab(target, options = {}) {
     scrollToItem(options.snapPoints, options.step, "next");
   }, 300);
 
-  const handleBlur = debounce(function (e) {
+  const handleBlur = debounce(function (this: HTMLElement) {
     getInfoElement();
     const rect = this.getBoundingClientRect();
     const containerRectLeftCurrent = options.containerLeft - options.marginLeft;
@@ -175,8 +194,8 @@ export function useTab(target, options = {}) {
   });
 
   onUnmounted(() => {
-    prev.removeEventListener("click", handlePrev);
-    next.removeEventListener("click", handleNext);
+    options.prev.removeEventListener("click", handlePrev);
+    options.next.removeEventListener("click", handleNext);
     options.snapPoints.forEach((element) => {
       element.removeEventListener("mouseover", handleBlur);
     });

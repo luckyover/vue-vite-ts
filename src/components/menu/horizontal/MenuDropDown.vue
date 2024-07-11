@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import MenuChildDropDown from "@/components/menu/MenuChildDropDown.vue";
+import MenuChildDropDown from "@/components/menu/horizontal/MenuChildDropDown.vue";
 import menu from "@/data/menu.js";
-import { useTab } from "@/composables/tab-menu.js";
+import { useTab } from "@/composables/tab-menu.ts";
 
-const menu_inner = ref<HTMLElement | null>(null);
-useTab(menu_inner);
+const menu_inner = ref<HTMLElement | null>(null); 
+useTab(menu_inner); 
 
 </script>
 <template>
   <div class="w-full max-w-[1000px] mx-auto mt-7">
     <ul class="menu-inner overflow-x-auto overflow-y-hidden" ref="menu_inner">
       <MenuChildDropDown
-        v-for="(item, index) in menu.menus"
+        v-for="(item, index) in menu"
         :key="index"
         :item="item"
         :parent="true"
