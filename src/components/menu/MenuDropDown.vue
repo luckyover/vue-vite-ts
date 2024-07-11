@@ -108,12 +108,18 @@ useTab(menu_inner);
   border-radius: 50%;
   background-color: #b4bdc6 !important;
 }
+.menu-horizontal-prev.disabled, .menu-horizontal-next.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 .menu-horizontal-prev {
   position: relative;
   display: block;
   flex: 0 0 auto;
   width: 2.25rem;
   height: 2.25rem;
+
   &::after {
     content: "";
     position: absolute;

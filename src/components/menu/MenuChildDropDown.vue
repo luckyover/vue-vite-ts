@@ -22,9 +22,7 @@ const left = ref<string>("");
 const pos = ref<"left" | "right">("left");
 
 const handleBlur = (value) => {
-  if (props.parent != true) {
-    isShow.value = value;
-  }
+  isShow.value = value;
 };
 watch(
   () => isShow.value,
@@ -51,23 +49,7 @@ watch(
   }
 );
 
-onMounted(() => {
-  document.addEventListener("blurFinished", (event) => {
-    if (menuItem.value && menuItem.value == event.detail.element) {
-      if (event.detail.type == "mouseover") {
-        isShow.value = true;
-      } else {
-        isShow.value = false;
-      }
-    }
-    if (event.detail.type == "mouseleave") {
-      isShow.value = false;
-    }
-  });
-  document.addEventListener("leaveFinished", (event) => {
-    isShow.value = false;
-  });
-});
+
 </script>
 
 <template>
@@ -96,7 +78,7 @@ onMounted(() => {
     <Transition
       enter-from-class="opacity-0 transform -translate-y-2"
       enter-to-class="opacity-100 transform -translate-y-0"
-      enter-active-class="ease-in-out duration-300"
+      enter-active-class="ease-in-out duration-500"
     >
       <ul
         v-if="item.child && item.child.length && isShow"

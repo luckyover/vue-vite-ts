@@ -2,7 +2,6 @@ import { onMounted, onUnmounted } from "vue";
 import { debounce } from "@/composables/debounce.js";
 
 export function useTab(target, options = {}) {
-
   let defaultOptions = {
     min: 0,
     max: 0,
@@ -13,6 +12,8 @@ export function useTab(target, options = {}) {
     marginLeft: 0,
     el: null,
     step: 2,
+    prev: null,
+    next: null,
   };
 
   options = {
@@ -23,12 +24,13 @@ export function useTab(target, options = {}) {
   const createWrapDiv = () => {
     const newDiv = document.createElement("div");
     newDiv.setAttribute("class", "flex items-center");
-
-    const prev = document.createElement("a");
+    let prev = null,
+      next = null;
+    prev = document.createElement("a");
     prev.setAttribute("href", "#");
-    prev.setAttribute("class", "menu-horizontal-prev");
+    prev.setAttribute("class", "menu-horizontal-prev disabled");
 
-    const next = document.createElement("a");
+    next = document.createElement("a");
     next.setAttribute("href", "#");
     next.setAttribute("class", "menu-horizontal-next");
 
@@ -49,6 +51,7 @@ export function useTab(target, options = {}) {
   const getInfoElement = () => {
     const containerRect = options.el.getBoundingClientRect();
     options.containerWidth = options.el.clientWidth;
+    options.scrollWidth = options.el.scrollWidth;
     options.containerLeft = containerRect.left;
     options.containerRight = options.containerLeft + options.containerWidth;
     options.snapPoints = Array.from(options.el.children);
@@ -69,7 +72,7 @@ export function useTab(target, options = {}) {
     );
   };
 
-  const scrollToItem = (arrList,step,type) => {
+  const scrollToItem = (arrList, step, type) => {
     let isScroll = false;
 
     if (type == "prev" && options.min > 0) {
@@ -78,12 +81,15 @@ export function useTab(target, options = {}) {
       options.max -= minStep;
       isScroll = true;
     } else if (type === "next" && options.max < options.snapPoints.length - 1) {
-      const maxStep = Math.min(options.snapPoints.length - 1 - options.max, step);
+      const maxStep = Math.min(
+        options.snapPoints.length - 1 - options.max,
+        step
+      );
       options.max += maxStep;
       options.min += maxStep;
       isScroll = true;
     }
-    
+
     let index = {
       next: options.max,
       prev: options.min,
@@ -107,54 +113,55 @@ export function useTab(target, options = {}) {
           options.marginLeft - (rect.left - containerRectLeftCurrent);
         options.el.style.marginLeft = options.marginLeft + "px";
       }
+
+      options.prev.classList.toggle("disabled", options.min == 0);
+      options.next.classList.toggle(
+        "disabled",
+        options.max == options.snapPoints.length - 1
+      );
     }
   };
 
   //handle
   const handlePrev = debounce(() => {
-    scrollToItem(options.snapPoints,options.step, "prev");
+    scrollToItem(options.snapPoints, options.step, "prev");
   }, 300);
-  
-  const handleNext = debounce(() => {
-    scrollToItem(options.snapPoints,options.step, "next");
-  },300);
 
-  
-  const handleBlur = debounce(function(e){
+  const handleNext = debounce(() => {
+    scrollToItem(options.snapPoints, options.step, "next");
+  }, 300);
+
+  const handleBlur = debounce(function (e) {
     getInfoElement();
     const rect = this.getBoundingClientRect();
-    const containerRectLeftCurrent =
-    options.containerLeft - options.marginLeft;
-    let right =  options.containerRight + 30; 
-    if(rect.right > right && rect.left < options.containerRight){
-      scrollToItem(options.snapPoints,1, "next");
+    const containerRectLeftCurrent = options.containerLeft - options.marginLeft;
+    let right = options.containerRight + 30;
+    if (rect.right > right && rect.left < options.containerRight) {
+      scrollToItem(options.snapPoints, 1, "next");
     }
-   
-   
-    if(rect.left < containerRectLeftCurrent  && rect.right > containerRectLeftCurrent){
-      scrollToItem(options.snapPoints,1, "prev");
+
+    if (
+      rect.left < containerRectLeftCurrent &&
+      rect.right > containerRectLeftCurrent
+    ) {
+      scrollToItem(options.snapPoints, 1, "prev");
     }
-    const blurFinishedEvent = new CustomEvent('blurFinished', {
-      detail: { element: this,type:e.type }
-    });
-    document.dispatchEvent(blurFinishedEvent);
-    
-  },100);
-  
-  const handleLeave = debounce(function(e){
-    const blurFinishedEvent = new CustomEvent('leaveFinished', {
-      detail: { element: this,type:e.type }
-    });
-    document.dispatchEvent(blurFinishedEvent);
-    
-  },110);
+  }, 100);
 
   onMounted(() => {
     options.el = target.value;
+
     const { prev, next } = createWrapDiv();
+    options.prev = prev;
+    options.next = next;
     //
     getInfoElement();
     //
+
+    if( options.containerWidth == options.scrollWidth){
+      options.prev.classList.add('hidden')
+      options.next.classList.add('hidden')
+    }
     const { min, max } = getStartEnd(options.snapPoints);
     options.min = min;
     options.max = max;
@@ -162,18 +169,16 @@ export function useTab(target, options = {}) {
     prev.addEventListener("click", handlePrev);
     next.addEventListener("click", handleNext);
 
-    options.snapPoints.forEach(element => {
+    options.snapPoints.forEach((element) => {
       element.addEventListener("mouseover", handleBlur);
-      element.addEventListener("mouseleave", handleLeave);
     });
   });
 
   onUnmounted(() => {
     prev.removeEventListener("click", handlePrev);
     next.removeEventListener("click", handleNext);
-    options.snapPoints.forEach(element => {
+    options.snapPoints.forEach((element) => {
       element.removeEventListener("mouseover", handleBlur);
-      element.removeEventListener("mouseleave", handleLeave);
     });
   });
 }
