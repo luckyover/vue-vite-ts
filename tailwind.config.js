@@ -17,7 +17,9 @@ module.exports = {
         txw:'#fff',
         gray:{
           100:'#566a7f',
-        }
+        },
+        backdrop:'#22303e',
+
       },
       boxShadow:{
         ct:'0 1px 0 #d9dee3',
@@ -37,7 +39,12 @@ module.exports = {
       },
       fontSize:{
         
-      }
+      },
+      translate: {
+        '-full-x': '-100%', // Custom translate value
+        '3d': 'translate3d(0, 0, 0)',
+      },
+     
     }
    
   },

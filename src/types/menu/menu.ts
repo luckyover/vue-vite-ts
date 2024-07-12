@@ -10,4 +10,5 @@ export interface IMenuChildDropDown {
     item: MenuItem;
     parent?: boolean;
     position?: string;
+    isOpen?: boolean;
 }

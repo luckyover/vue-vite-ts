@@ -22,7 +22,16 @@ export default [
         menu: "Test2",
         icon: "bx-layout",
 
-        child: [],
+        child: [
+          {
+            menu: "Test11",
+            icon: "bx-layout",
+          },
+          {
+            menu: "Test12",
+            icon: "",
+          },
+        ],
       },
     ],
   },
