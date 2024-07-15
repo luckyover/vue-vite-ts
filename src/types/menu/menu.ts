@@ -12,3 +12,6 @@ export interface IMenuChildDropDown {
     position?: string;
     isOpen?: boolean;
 }
+export interface IMenuResponsive  {
+   type?: string
+}

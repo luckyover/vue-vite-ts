@@ -1,33 +1,47 @@
 <script setup lang="ts">
-import MenuChildDropDown from "@/components/menu/ipad/MenuChildDropDown.vue";
+import MenuChildDropDown from "@/components/menu/vertical/MenuChildDropDown.vue";
 import menu from "@/data/menu.ts";
-import { ref } from "vue";
-
+import { ref, computed } from "vue";
+import { IMenuResponsive } from "@/types/menu/menu.ts";
+const props = defineProps<IMenuResponsive>();
 const isOpen = ref<boolean>(false);
 const openMenuIndex = ref(null);
+
 const handleToggle = (index) => {
   return (openMenuIndex.value = openMenuIndex.value === index ? null : index);
 };
+
+const getId = computed(() => {
+  if (props.type == "ipad") {
+    return "menu-ipad";
+  } else {
+    return "menu-vertical";
+  }
+});
 </script>
 <template>
   <div @click="isOpen = !isOpen">
     <slot> </slot>
   </div>
   <div>
-    <!-- <div
+    <div
       class="fixed inset-0 transform transition-all"
-      v-if="isOpen"
+      v-if="isOpen && type == 'ipad'"
       @click="isOpen = false"
     >
       <div class="absolute inset-0 bg-backdrop opacity-50"></div>
-    </div> -->
-    <!-- :class="isOpen ? 'transform-3d' : '-translate-x-full'" -->
+    </div>
+
     <div
-      class=" w-[260px] bg-slate-300 text-nav fixed left-0 top-0 transform"
-      id="menu-ipad"
-     
-      :class="isOpen ? 'open' : 'close'"
+      class="w-[260px] bg-slate-300 text-nav fixed left-0 top-0"
+      id="menu-wrap"
+      :class="[isOpen ? 'open' : 'close', getId]"
     >
+      <div class="logo-details h-15 flex items-center relative" >
+        <i class="bx bxl-c-plus-plus icon"></i>
+        <div class="logo_name">CodingLab</div>
+        <i class="bx bx-menu-alt-right" id="btn"></i>
+      </div>
       <ul class="menu-inner my-0 mx-4">
         <MenuChildDropDown
           v-for="(item, index) in menu"
@@ -43,15 +57,11 @@ const handleToggle = (index) => {
 </template>
 
 <style lang="scss">
-// #menu-ipad {
-//   transition-duration: 0.3s;
-//   transition-property: transform, -webkit-transform;
-// }
-#menu-ipad .menu-link {
+#menu-wrap .menu-link {
   position: relative;
   padding: 9px 35px 9px 16px;
 }
-#menu-ipad .has-child > .menu-link {
+#menu-wrap .has-child > .menu-link {
   &::after {
     content: "";
     position: absolute;
@@ -66,11 +76,11 @@ const handleToggle = (index) => {
     transform: translateY(-50%) rotate(45deg);
   }
 }
-#menu-ipad .menu-toggle::after {
+#menu-wrap .menu-toggle::after {
   transition-duration: 0.3s;
   transition-property: -webkit-transform, transform;
 }
-#menu-ipad .menu-item.open {
+#menu-wrap .menu-item.open {
   > .menu-link {
     &::after {
       transform: translateY(-50%) rotate(135deg);
@@ -78,7 +88,7 @@ const handleToggle = (index) => {
   }
 }
 
-#menu-ipad .menu-sub > .menu-item > .menu-link {
+#menu-wrap .menu-sub > .menu-item > .menu-link {
   &::before {
     content: "";
     position: absolute;
@@ -94,22 +104,35 @@ const handleToggle = (index) => {
   padding-bottom: 0.625rem;
   color: #566a7f;
 }
-
-///
-#menu-ipad.close .menu-sub{
+///menu-ipad
+.menu-ipad {
+  transition-duration: 0.3s;
+  transition-property: transform, -webkit-transform;
+  transform: translate3d(-100%, 0, 0);
+}
+.menu-ipad.open {
+  transform: translate3d(0, 0, 0);
+}
+///menu-vertical
+#menu-wrap.menu-vertical.close .has-child > .menu-link {
+  &::after {
+    display: none;
+  }
+}
+.menu-vertical.close .menu-sub {
   display: none;
 }
-#menu-ipad.close{
+.menu-vertical.close {
   width: 5.25rem;
 }
-#menu-ipad .menu-link >div{
+.menu-vertical .menu-link > div {
   transition: all 0.4s ease;
   opacity: 0;
-} 
-#menu-ipad.open .menu-link >div{
+}
+.menu-vertical.open .menu-link > div {
   opacity: 1;
-} 
-#menu-ipad{
+}
+.menu-vertical {
   transition: all 0.5s ease;
 }
 </style>

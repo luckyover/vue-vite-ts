@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MenuChildDropDown from "@/components/menu/ipad/MenuChildDropDown.vue";
+import MenuChildDropDown from "@/components/menu/vertical/MenuChildDropDown.vue";
 import { IMenuChildDropDown } from "@/types/menu/menu.ts";
 import { ref } from "vue";
 
