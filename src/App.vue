@@ -15,5 +15,8 @@ import MenuDropDown from '@/components/menu/vertical/MenuDropDown.vue'
   
 </template>
 
-<style scoped>
+<style>
+body{
+  background: #f5f5f9;
+}
 </style>

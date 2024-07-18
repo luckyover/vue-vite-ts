@@ -16,6 +16,7 @@ module.exports = {
         bgh:'#787bff',
         bod:'#f5f5f9',
         txw:'#fff',
+        menu:'#384551',
         gray:{
           100:'#566a7f',
         },
@@ -25,6 +26,7 @@ module.exports = {
       boxShadow:{
         ct:'0 1px 0 #d9dee3',
         'drop-down': '0 .25rem 1rem rgba(161, 172, 184, .45)',
+        menu: '0 .125rem .375rem 0 rgba(34, 48, 62, .08)',
       },
       borderWidth:{
         '7':'7px',

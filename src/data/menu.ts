@@ -7,31 +7,12 @@ export default [
         menu: "Test",
         icon: "bx-layout",
 
-        child: [
-          {
-            menu: "Test11",
-            icon: "bx-layout",
-          },
-          {
-            menu: "Test12",
-            icon: "",
-          },
-        ],
       },
       {
         menu: "Test2",
         icon: "bx-layout",
 
-        child: [
-          {
-            menu: "Test11",
-            icon: "bx-layout",
-          },
-          {
-            menu: "Test12",
-            icon: "",
-          },
-        ],
+      
       },
     ],
   },
@@ -43,18 +24,7 @@ export default [
         menu: "Test",
         icon: "bx-layout",
 
-        child: [
-          {
-            menu: "Test11",
-            icon: "bx-layout",
-
-            child: [],
-          },
-          {
-            menu: "Test12",
-            icon: "bx-layout",
-          },
-        ],
+      
       },
       {
         menu: "Test2",

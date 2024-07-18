@@ -7,7 +7,7 @@ const props = defineProps<IMenuResponsive>();
 const isOpen = ref<boolean>(false);
 const openMenuIndex = ref(null);
 
-const handleToggle = (index) => {
+const handleToggle = index => {
   return (openMenuIndex.value = openMenuIndex.value === index ? null : index);
 };
 
@@ -21,7 +21,7 @@ const getId = computed(() => {
 </script>
 <template>
   <div @click="isOpen = !isOpen">
-    <slot> </slot>
+    <slot></slot>
   </div>
   <div>
     <div
@@ -33,15 +33,23 @@ const getId = computed(() => {
     </div>
 
     <div
-      class="w-[260px] bg-slate-300 text-nav fixed left-0 top-0"
+      class="w-[260px] bg-white shadow-menu text-nav fixed left-0 top-0"
       id="menu-wrap"
       :class="[isOpen ? 'open' : 'close', getId]"
     >
-      <div class="logo-details h-[60px] leading-[60px] flex items-center relative ml-4" >
-        <i class="bx bxl-c-plus-plus icon text-white h-[60px] !leading-[60px] min-w-[55px] text-2xl text-center opacity-0"></i>
-        <div class="logo_name text-white text-2xl font-semibold opacity-0 h-[60px] !leading-[60px] ">CodingLab</div>
-        <i class="bx  text-white text-2xl min-w-[55px] h-[60px] !leading-[60px]    absolute top-1/2 right-0 transform -translate-y-1/2" :class="isOpen ? 'bx-menu-alt-right' : 'bx-menu'" id="btn-menu" @click="isOpen = !isOpen" ></i>
-
+      <div class="logo-details h-[60px] leading-[60px] flex items-center relative ml-4">
+        <i
+          class="bx bxl-c-plus-plus icon text-black h-[60px] !leading-[60px] min-w-[55px] text-2xl text-center opacity-0"
+        ></i>
+        <div
+          class="logo_name text-black text-2xl font-semibold opacity-0 h-[60px] !leading-[60px]"
+        >CodingLab</div>
+        <i
+          class="bx text-black text-2xl min-w-[55px] h-[60px] !leading-[60px] absolute top-1/2 right-0 transform -translate-y-1/2"
+          :class="isOpen ? 'bx-menu-alt-right' : 'bx-menu'"
+          id="btn-menu"
+          @click="isOpen = !isOpen"
+        ></i>
       </div>
       <ul class="menu-inner my-0 mx-4">
         <MenuChildDropDown
@@ -61,7 +69,25 @@ const getId = computed(() => {
 #menu-wrap .menu-link {
   position: relative;
   padding: 9px 35px 9px 16px;
+  border-radius: 0.375rem;
 }
+#menu-wrap .item-parent.active .menu-link {
+  color: #696cff;
+  background-color: rgba(105, 108, 255, 0.16) !important;
+}
+#menu-wrap .menu-item:not(.active) .menu-link:hover {
+  background-color: rgba(34, 48, 62, 0.06);
+}
+#menu-wrap .menu-sub > .menu-item > .menu-link.active{
+  &::before {
+    left: 1.0875rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    background-color: #696cff !important;
+    border: 3px solid #e7e7ff !important;
+  }
+}
+
 #menu-wrap .has-child > .menu-link {
   &::after {
     content: "";
@@ -69,9 +95,9 @@ const getId = computed(() => {
     top: calc(50% - 2px);
     right: calc(1rem + 0.21em);
     display: block;
-    width: 0.42em;
-    height: 0.42em;
-    border: 1px solid;
+    width: 0.45em;
+    height: 0.45em;
+    border: 1.5px solid #384551;
     border-bottom: 0;
     border-left: 0;
     transform: translateY(-50%) rotate(45deg);
@@ -103,7 +129,6 @@ const getId = computed(() => {
   padding-left: 3rem;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
-  color: #566a7f;
 }
 ///menu-ipad
 .menu-ipad {
@@ -131,13 +156,14 @@ const getId = computed(() => {
   opacity: 0;
 }
 
-
 .menu-vertical.open .menu-link > div,
 .menu-vertical.open .bxl-c-plus-plus,
 .menu-vertical.open .logo_name {
   opacity: 1;
 }
-.menu-vertical,.menu-vertical .bxl-c-plus-plus,.menu-vertical .logo_name {
+.menu-vertical,
+.menu-vertical .bxl-c-plus-plus,
+.menu-vertical .logo_name {
   transition: all 0.5s ease;
 }
 </style>
