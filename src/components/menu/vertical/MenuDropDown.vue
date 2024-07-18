@@ -37,10 +37,11 @@ const getId = computed(() => {
       id="menu-wrap"
       :class="[isOpen ? 'open' : 'close', getId]"
     >
-      <div class="logo-details h-15 flex items-center relative" >
-        <i class="bx bxl-c-plus-plus icon"></i>
-        <div class="logo_name">CodingLab</div>
-        <i class="bx bx-menu-alt-right" id="btn"></i>
+      <div class="logo-details h-[60px] leading-[60px] flex items-center relative ml-4" >
+        <i class="bx bxl-c-plus-plus icon text-white h-[60px] !leading-[60px] min-w-[55px] text-2xl text-center opacity-0"></i>
+        <div class="logo_name text-white text-2xl font-semibold opacity-0 h-[60px] !leading-[60px] ">CodingLab</div>
+        <i class="bx  text-white text-2xl min-w-[55px] h-[60px] !leading-[60px]    absolute top-1/2 right-0 transform -translate-y-1/2" :class="isOpen ? 'bx-menu-alt-right' : 'bx-menu'" id="btn-menu" @click="isOpen = !isOpen" ></i>
+
       </div>
       <ul class="menu-inner my-0 mx-4">
         <MenuChildDropDown
@@ -129,10 +130,14 @@ const getId = computed(() => {
   transition: all 0.4s ease;
   opacity: 0;
 }
-.menu-vertical.open .menu-link > div {
+
+
+.menu-vertical.open .menu-link > div,
+.menu-vertical.open .bxl-c-plus-plus,
+.menu-vertical.open .logo_name {
   opacity: 1;
 }
-.menu-vertical {
+.menu-vertical,.menu-vertical .bxl-c-plus-plus,.menu-vertical .logo_name {
   transition: all 0.5s ease;
 }
 </style>

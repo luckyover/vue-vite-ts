@@ -6,6 +6,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+
       colors: {
         // Configure your color palette here
         shadow:'#d9dee3',
@@ -44,7 +45,9 @@ module.exports = {
         '-full-x': '-100%', // Custom translate value
         '3d': 'translate3d(0, 0, 0)',
       },
-     
+      fontFamily: {
+        'public-sans': ['Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
+      },
     }
    
   },
