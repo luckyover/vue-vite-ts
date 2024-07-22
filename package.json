@@ -15,6 +15,7 @@
     "bootstrap-vue": "^2.23.1",
     "bootstrap-vue-3": "^0.3.12",
     "boxicons": "^2.1.4",
+    "swiper": "^11.1.5",
     "vue": "^3.4.26",
     "vue-router": "^4.3.2",
     "vuex": "^4.0.2"
