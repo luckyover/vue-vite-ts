@@ -1,10 +1,8 @@
 <template>
-  <div class="container max-w-[1400px] mx-auto">
-    <div class="lg:grid-cols-4 md:grid-cols-3 grid-cols-2 grid gap-4">
-      <div
-        class="card-item bg-[whitesmoke] hover:-translate-y-2 min-h-80 flex flex-col justify-center items-center m-2.5 box-border rounded-lg shadow-md transition-transform duration-200 ease-in-out"
+   <div
+        class="card-item bg-[whitesmoke] hover:-translate-y-2  flex flex-col  m-2.5 box-border rounded-lg shadow-md transition-transform duration-200 ease-in-out"
       >
-        <div class="relative h-0 pt-[80%] w-full">
+        <div class="relative h-0 pb-[80%] w-full">
           <div
             class="h-[60%] absolute top-0 w-full bg-[rgb(178,180,179)] rounded-lg"
           ></div>
@@ -14,7 +12,7 @@
             alt="sekiro-figurine"
           />
         </div>
-        <div class="text-container mt-6">
+        <div class="text-container mt-6 p-2 md:p-3">
           <ul class="ratings flex">
             <li><i class='bx bxs-star text-[#ee4d2d]'></i></li>
             <li><i class='bx bxs-star text-[#ee4d2d]'></i></li>
@@ -25,7 +23,7 @@
           <h2 class="product-title">Osamu Dazai Funko</h2>
 
           <div class="pricing-and-cart">
-            <div class="pricing">
+            <div class="pricing flex justify-between">
               <p class="previous-price">
                 <span class="">₫</span>
                 <span class="price">48.020</span>
@@ -35,6 +33,4 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
