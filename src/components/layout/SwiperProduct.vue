@@ -87,12 +87,3 @@ const onSlideChange = (swiper) => {
   activeIndex.value = swiper.activeIndex;
 };
 </script>
-
-<style>
-/* Transition classes */
-
-.swiper-slide {
-  border: 1px solid;
-  width: 100px !important;
-}
-</style>
