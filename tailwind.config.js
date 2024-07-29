@@ -27,15 +27,14 @@ module.exports = {
         ct:'0 1px 0 #d9dee3',
         'drop-down': '0 .25rem 1rem rgba(161, 172, 184, .45)',
         menu: '0 .125rem .375rem 0 rgba(34, 48, 62, .08)',
+        'card': '0 .1875rem .5rem 0 rgba(34, 48, 62, .1)',
       },
       borderWidth:{
         '7':'7px',
       },
       screens: {
-        sm: '480px',
         md: '768px',
-        lg: '976px',
-        xl: '1200px',
+        lg: '1024px',
       },
       inset: {
         '3px': '15rem',

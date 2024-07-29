@@ -1,59 +1,8 @@
-<script setup lang="ts">
-//   onMounted(() => {
-//     //menu-horizontal
-//     var menuItem = document.querySelectorAll(".menu-horizontal .menu-inner .menu-item");
-//     menuItem.forEach((item) => {
-//         item.addEventListener('mouseover',(e) => {
-//           e.preventDefault()
-//           item.classList.add("open");
-//         });
-//         item.addEventListener('mouseout',(e) => {
-//           e.preventDefault()
-//           item.classList.remove("open");
-//         });
-//     });
 
-//     //fix dot menu-horizontal
-//     var menu_icons = document.querySelectorAll(".menu-horizontal .menu-inner .menu-item .menu-link .menu-icon");
-//     menu_icons.forEach(menu_icon => {
-//     var menu_link = menu_icon.closest('.menu-link');
-//     // Check if such ancestor exists
-//     if (menu_link) {
-//         menu_link.classList.add("not-before");
-//     }
-
-//     // Listen for window resize event
-//     window.addEventListener('resize',function(){
-//       let layout_menu = document.getElementById('layout-menu');
-//       layout_menu.className = '';
-//       layout_menu?.classList.add('menu','bg-menu-theme');
-//       if(window.innerWidth < 1200){
-//         layout_menu?.classList.add('layout-menu','menu-vertical');
-
-//         layout_menu.getElementsByClassName('container-xxl')[0].classList.add('flex-column','p-0');
-
-//         //set up move node
-//         document.getElementById('menu-inner-wrap').classList.add('overflow-auto');
-
-//       }else{
-//         layout_menu?.classList.add('layout-menu-horizontal','menu-horizontal','container-fluid','flex-grow-0')
-//       }
-//     });
-
-// });
-
-// })
-</script>
 
 <template>
   <!-- Layout wrapper -->
-  <div
-    class="layout-wrapper w-full flex items-stretch layout-navbar-full layout-horizontal layout-without-menu"
-  >
-    <div class="layout-container flex w-full items-stretch flex-col ">
-      <!-- Navbar -->
-
-      <nav
+   <nav
         class="layout-navbar w-full justify-start navbar h-16 flex xl:fixed xl:inset-x-0 xl:inset-y-0 shadow-ct backdrop-blur bg-bg_layout text-nav py-1"
         id="layout-navbar"
       >
@@ -161,14 +110,6 @@
           </div>
         </div>
       </nav>
-
-      <!-- / Navbar -->
-
-      <!-- Layout container -->
-
-      <!--/ Layout container -->
-    </div>
-  </div>
 </template>
 
-<style scoped></style>
+

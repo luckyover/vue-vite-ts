@@ -9,7 +9,7 @@ useTab(menu_inner);
 
 </script>
 <template>
-  <div class="w-full max-w-[1000px] mx-auto mt-7">
+  <div class="w-full  mx-auto ">
     <ul class="menu-inner overflow-x-auto overflow-y-hidden" ref="menu_inner">
       <MenuChildDropDown
         v-for="(item, index) in menu"
@@ -38,7 +38,7 @@ useTab(menu_inner);
       display: block;
       width: 0.42em;
       height: 0.42em;
-      border: 1px solid;
+      border: 1.5px solid #384551;
       border-bottom: 0;
       border-left: 0;
       transform: translateY(-50%) rotate(135deg);

@@ -57,7 +57,7 @@ watch(
   >
     <a
       href="javascript:void(0)"
-      class="menu-link menu-toggle text-gray-100 p-[0.565rem] px-[1rem] flex items-center"
+      class="menu-link menu-toggle text-menu p-[0.565rem] px-[1rem] flex items-center"
       :class="[item.icon && item.icon !== '' ? '' : 'not-icon']"
     >
       <i
