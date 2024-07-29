@@ -50,6 +50,9 @@ module.exports = {
       fontFamily: {
         'public-sans': ['Public Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
       },
+      gridTemplateColumns: {
+        'product_card': '10% 1fr',
+      },
     }
    
   },

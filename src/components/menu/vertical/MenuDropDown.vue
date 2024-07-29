@@ -7,7 +7,7 @@ const props = defineProps<IMenuResponsive>();
 const isOpen = ref<boolean>(false);
 const openMenuIndex = ref(null);
 
-const handleToggle = index => {
+const handleToggle = (index:any) => {
   return (openMenuIndex.value = openMenuIndex.value === index ? null : index);
 };
 

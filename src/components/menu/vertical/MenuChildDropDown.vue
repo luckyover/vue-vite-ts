@@ -12,7 +12,7 @@ const toggle = () => {
 
 //child
 const openMenuIndex = ref(null);
-const handleToggle = (index) => {
+const handleToggle = (index:any) => {
   return (openMenuIndex.value = openMenuIndex.value === index ? null : index);
 };
 </script>
