@@ -1,7 +1,7 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
-import HorizontalMenu from '@/components/menu/horizontal/MenuDropDown.vue'
+import Home from '@/page/home/home.vue'
 const routes = [
-  { path: '/', component: HorizontalMenu },
+  { path: '/', component: Home },
 ]
 
 const router = createRouter({

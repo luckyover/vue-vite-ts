@@ -13,6 +13,8 @@ body{
 .ln-container{
     padding-right: 1rem;
     padding-left: 1rem;
+    margin-left: auto;
+    margin-right: auto;
  }
 @media (min-width: 1400px) {
   .ln-container{

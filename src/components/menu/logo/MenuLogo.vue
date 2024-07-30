@@ -1,14 +1,28 @@
 
 
+<script setup lang="ts">
+import { IMenuResponsive } from "@/types/menu/menu.ts";
+import {defineEmits} from 'vue';
+const emit = defineEmits(['clickMenu'])
+const props = defineProps<IMenuResponsive>();
+const handelClickMenu = () => {
+  emit('clickMenu');
+}
+</script>
 <template>
   <!-- Layout wrapper -->
    <nav
-        class="layout-navbar w-full justify-start navbar h-16 flex xl:fixed xl:inset-x-0 xl:inset-y-0 shadow-ct backdrop-blur bg-bg_layout text-nav py-1"
+        class="layout-navbar  w-full justify-start navbar h-16 flex xl:fixed xl:inset-x-0 xl:inset-y-0   bg-bg_layout text-nav py-1"
         id="layout-navbar"
       >
-        <div class="flex w-full flex-wrap justify-between items-center px-6">
-          <div class="navbar-brand flex ">
-            <a href="index-2.html" class="app-brand-link flex items-center gap-2">
+        <div class="flex w-full flex-wrap justify-between items-center px-6 ln-container">
+          <div class="navbar-brand flex items-center gap-2">
+            <div class="layout-menu-toggle navbar-nav pt-[10px]" v-if="props.type == 'ipad'" >
+            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)" @click ="handelClickMenu" >
+              <i class="bx bx-menu bx-sm"></i>
+            </a>
+          </div>
+            <a href="javascript:void(0)" class="app-brand-link flex items-center gap-2 ">
               <span class="app-brand-logo">
                 <svg
                   class=" w-6 h-9"
@@ -96,11 +110,7 @@
               <i class="justify-center bx bx-chevron-left bx-sm align-middle text-txw w-6 h-6 !flex items-center"></i>
             </a>
           </div>
-          <div class="layout-menu-toggle navbar-nav hidden"  >
-            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-              <i class="bx bx-menu bx-sm"></i>
-            </a>
-          </div>
+         
           <div  class="navbar-nav-right flex"
             id="navbar-collapse"
           >
@@ -111,5 +121,3 @@
         </div>
       </nav>
 </template>
-
-

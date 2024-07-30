@@ -6,7 +6,6 @@ import { IMenuResponsive } from "@/types/menu/menu.ts";
 const props = defineProps<IMenuResponsive>();
 const isOpen = ref<boolean>(false);
 const openMenuIndex = ref(null);
-
 const handleToggle = (index:any) => {
   return (openMenuIndex.value = openMenuIndex.value === index ? null : index);
 };
@@ -18,11 +17,13 @@ const getId = computed(() => {
     return "menu-vertical";
   }
 });
+
+defineExpose({
+  isOpen
+})
 </script>
 <template>
-  <div @click="isOpen = !isOpen">
-    <slot></slot>
-  </div>
+
   <div>
     <div
       class="fixed inset-0 transform transition-all"
@@ -33,7 +34,7 @@ const getId = computed(() => {
     </div>
 
     <div
-      class="w-[260px] bg-white shadow-menu text-nav fixed left-0 top-0"
+      class="w-[260px] h-full bg-white shadow-menu text-nav fixed left-0 top-0"
       id="menu-wrap"
       :class="[isOpen ? 'open' : 'close', getId]"
     >
@@ -51,7 +52,7 @@ const getId = computed(() => {
           @click="isOpen = !isOpen"
         ></i>
       </div>
-      <ul class="menu-inner my-0 mx-4">
+      <ul class="menu-inner my-0 mx-4 flex-col">
         <MenuChildDropDown
           v-for="(item, index) in menu"
           :key="index"

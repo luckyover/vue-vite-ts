@@ -14,4 +14,5 @@ export interface IMenuChildDropDown {
 }
 export interface IMenuResponsive  {
    type?: string
+   show?:boolean
 }
