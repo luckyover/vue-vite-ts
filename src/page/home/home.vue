@@ -4,7 +4,7 @@
 </script>
 <template>
     <div class="card bg-bg_layout shadow-card rounded-[0.357rem]">
-        <div class="card-body p-[1.5rem]">
+        <div class="card-body p-4 md:p-6">
                 <Slider/>
                 <ProductCard1/>
 

@@ -11,8 +11,8 @@ body{
   background: #f5f5f9;
 }
 .ln-container{
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: 0rem;
+    padding-left: 0rem;
     margin-left: auto;
     margin-right: auto;
  }
@@ -21,13 +21,18 @@ body{
      max-width: 1440px;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .ln-container{
-     padding-right: 1.625rem;
-     padding-left: 1.625rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
 }
-
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer/Edge */
+  user-select: none;         /* Non-prefixed version, currently supported by Chrome, Opera, and Edge */
+}
 
 
 </style>

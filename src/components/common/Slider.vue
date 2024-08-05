@@ -12,11 +12,11 @@
         v-for="(slideContent, index) in slides"
         :key="index"
         @click="scrollToSlide(index)"
-        class="md:!w-[45%] !w-[85%]"
+        class="md:!w-[32%] !w-[85%] no-select"
       >
         <div class="relative h-0 pb-[45%]">
           <img
-            class="absolute top-0 w-full h-full object-cover"
+            class="absolute top-0 w-full h-full object-cover rounded-md"
             :src="imageSrc"
             alt="sekiro-figurine"
           />

@@ -11,10 +11,10 @@ const handelClickMenu = () => {
 <template>
   <!-- Layout wrapper -->
    <nav
-        class="layout-navbar  w-full justify-start navbar h-16 flex xl:fixed xl:inset-x-0 xl:inset-y-0   bg-bg_layout text-nav py-1"
+        class="z-50  ln-container layout-navbar  w-full justify-start navbar h-16 flex fixed inset-x-0 inset-y-0   bg-bg_layout text-nav py-1"
         id="layout-navbar"
       >
-        <div class="flex w-full flex-wrap justify-between items-center px-6 ln-container pl-[1.5rem] pr-[1.5rem]">
+        <div class="flex w-full flex-wrap justify-between items-center px-8 md:px-6">
           <div class="navbar-brand flex items-center gap-2">
             <div class="layout-menu-toggle navbar-nav pt-[10px]" v-if="props.type == 'ipad'" >
             <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)" @click ="handelClickMenu" >

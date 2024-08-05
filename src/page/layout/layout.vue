@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 //import HorizontalMenu from "@/components/menu/horizontal/MenuDropDown.vue";
 import MenuLogo from "@/components/menu/logo/MenuLogo.vue";
-import Vertical from "@/components/menu/vertical/MenuDropDown.vue"
+// import Vertical from "@/components/menu/vertical/MenuDropDown.vue"
 import MenuMobile from "@/components/menu/mobile/Mobile.vue"
 import Category from "@/components/common/Category.vue"
 import { onMounted, onUnmounted, ref } from 'vue';
@@ -35,12 +35,12 @@ onUnmounted(() => {
 
 </script>
 <template>
-  <Vertical :type="device" v-if="device == 'ipad'" ref="menuRef"> </Vertical>
+  <!-- <Vertical :type="device" v-if="device == 'ipad'" ref="menuRef"> </Vertical> -->
   <MenuMobile :type="device" v-if="device == 'mobile'"> </MenuMobile>
   <div class="">
-    <MenuLogo :type="device" @clickMenu="handleClickMenu"/>
+    <MenuLogo type="device" @clickMenu="handleClickMenu"/>
     <div
-      class="HorizontalMenu w-full fixed top-[4rem]  bg-bg_layout "
+      class="HorizontalMenu w-full relative top-[4rem]  bg-bg_layout"
     >
       <div class="ln-container ">
         <Category/>
@@ -49,7 +49,7 @@ onUnmounted(() => {
     </div>
   </div>
   
-  <div class="ln-container pt-[10rem]">
+  <div class="ln-container pt-20">
     <router-view/>
   </div>
 </template>
