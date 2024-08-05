@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="bg-[#edeff4]/40 rounded-lg overflow-hidden grid grid-cols-[35%_1fr] items-center p-2.5 relative w-[400px]"
+      class="bg-[#edeff4]/40 rounded-lg overflow-hidden grid grid-cols-[35%_1fr] items-center p-2.5 relative"
     >
       <a
         class="relative h-0 pt-[100%] w-full bg-[rgb(212,212,210)] rounded-[5px]"
@@ -14,6 +14,8 @@
       </a>
 
       <div
+
+      
         class=""
       >
         <div>
