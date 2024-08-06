@@ -41,7 +41,13 @@ module.exports = {
         '3px': '15rem',
       },
       fontSize:{
-        
+        'ss':'12px',
+        's3':'13px',
+        's7':'17px',
+        's5':'15px',
+      },
+      lineHeight: {
+        'ss': '27px',
       },
       translate: {
         '-full-x': '-100%', // Custom translate value

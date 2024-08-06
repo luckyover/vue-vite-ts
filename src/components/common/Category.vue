@@ -5,7 +5,7 @@ const imageSrc = computed(() => {
 });
 </script>
 <template>
-  <div class="flex gap-3 px-4 md:px-3 ">
+  <div class="flex gap-3 px-4 md:px-3 pb-1 md:pb-2">
     <div class="item-category flex flex-col items-center">
       <div class="relative w-[60px] h-[60px] overflow-hidden bg-custom-gradient rounded-full">
         <img

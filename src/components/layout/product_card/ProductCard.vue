@@ -25,12 +25,12 @@
           <h2 class="product-title text-black font-semibold text-overflow">{{ item.title }}</h2>
 
           <div class="pricing-and-cart">
-            <div class="pricing flex justify-between">
-              <p class="previous-price">
-                <span class="">₫</span>
+            <div class="pricing flex justify-between items-center">
+              <p class="previous-price text-bgm font-semibold ">
+                <span class="text-sm">₫</span>
                 <span class="price">48.020</span>
               </p>
-              <p class="previous-price">Đã bán 1,7k</p>
+              <p class="previous-price text-ss">Đã bán 1,7k</p>
             </div>
           </div>
         </div>

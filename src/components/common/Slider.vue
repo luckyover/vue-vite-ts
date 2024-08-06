@@ -4,9 +4,9 @@
       slides-per-view="auto"
       :space-between="10"
       @swiper="onSwiper"
-      
       :modules="[Navigation, Pagination, Scrollbar, A11y]"
       @slideChange="onSlideChange"
+    
     >
       <swiper-slide
         v-for="(slideContent, index) in slides"

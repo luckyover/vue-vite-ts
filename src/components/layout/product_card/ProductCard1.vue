@@ -20,11 +20,11 @@
           <a href="product.html">
             <h4 class="text-black font-semibold text-overflow">{{item.title  }}</h4>
           </a>
-          <h4 class="text-[#777] ">{{ item.shop}}</h4>
+          <h4 class="text-[#777] text-s3">{{ item.shop}}</h4>
           <div class="price flex gap-2">
-            <h4>  <span class="">₫</span>{{ item.price  }}</h4>
-            <del class="text-[#777]">  <span class="">₫</span> {{ item.cost }}</del>
-            <span class="text-red-500">{{item.sale  }}</span>
+            <h4 class="text-bgm font-semibold">  <span class="text-sm ">₫</span>{{ item.price  }}</h4>
+            <del class="text-[#777] text-ss leading-ss ">  <span class="text-ss leading-ss">₫</span> {{ item.cost }}</del>
+            <span class="text-bgm text-ss leading-ss ">{{item.sale  }}</span>
           </div>
         </div>
       </div>
