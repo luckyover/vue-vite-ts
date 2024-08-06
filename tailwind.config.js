@@ -17,6 +17,7 @@ module.exports = {
         bod:'#f5f5f9',
         txw:'#fff',
         menu:'#384551',
+        black:'#222',
         gray:{
           100:'#566a7f',
         },
@@ -51,6 +52,10 @@ module.exports = {
       },
       gridTemplateColumns: {
         'product_card': '10% 1fr',
+      },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(#cad0ff, #e3e3e3)',
+        'custom-gradient1': 'linear-gradient(135deg, hsla(233, 97%, 77%, 1) 0%, hsla(0, 0%, 89%, 1) 100%, hsla(278, 50%, 73%, 1) 100%)',
       },
     }
    

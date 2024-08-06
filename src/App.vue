@@ -33,6 +33,10 @@ body{
   -ms-user-select: none;     /* Internet Explorer/Edge */
   user-select: none;         /* Non-prefixed version, currently supported by Chrome, Opera, and Edge */
 }
-
+.text-overflow {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
 </style>
